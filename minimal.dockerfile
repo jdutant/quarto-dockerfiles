@@ -11,8 +11,7 @@ FROM ubuntu:${UBUNTU_VERSION} as installer
 ARG OS
 ARG ARCH
 ARG QUARTO_VERSION
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
         curl \
         dpkg \
@@ -32,7 +31,7 @@ RUN apt-get update \
 #
 FROM installer
 # install make for tests
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
         make
 WORKDIR /data
 ENTRYPOINT [ "quarto" ]
