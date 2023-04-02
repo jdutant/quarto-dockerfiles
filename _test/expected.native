@@ -12,11 +12,11 @@ Pandoc
               [ Image
                   ( "" , [] , [] )
                   []
-                  ( "https://img.shields.io/github/actions/workflow/status/jdutant/quarto-dockerfiles/ci.yaml?branch=main"
+                  ( "https://img.shields.io/github/actions/workflow/status/dialoa/quarto-dockerfiles/ci.yaml?branch=main"
                   , ""
                   )
               ]
-              ( "https://github.com/tarleb/lua-filter-template/jdutant/quarto-dockerfiles/ci.yaml"
+              ( "https://github.com/dialoa/quarto-dockerfiles/ci.yaml"
               , ""
               )
           ]
@@ -590,5 +590,153 @@ Pandoc
       , Str "GitHub"
       , SoftBreak
       , Str "action."
+      ]
+  , Header
+      3
+      ( "explore-the-image" , [] , [] )
+      [ Str "Explore" , Space , Str "the" , Space , Str "image" ]
+  , Para
+      [ Str "To"
+      , Space
+      , Str "explore"
+      , Space
+      , Str "the"
+      , Space
+      , Str "image,"
+      , Space
+      , Str "create"
+      , Space
+      , Str "a"
+      , Space
+      , Str "container"
+      , Space
+      , Str "with"
+      , Space
+      , Str "empty"
+      , Space
+      , Str "entrypoint:"
+      ]
+  , CodeBlock
+      ( "" , [ "bash" ] , [] )
+      "docker run -rm -it --entrypoint='' myquarto bash"
+  , Para
+      [ Code ( "" , [] , [] ) "-rm"
+      , Space
+      , Str "deletes"
+      , Space
+      , Str "the"
+      , Space
+      , Str "container"
+      , Space
+      , Str "after"
+      , Space
+      , Str "your"
+      , Space
+      , Str "session;"
+      , Space
+      , Code ( "" , [] , [] ) "-it"
+      , Space
+      , Str "opens"
+      , SoftBreak
+      , Str "the"
+      , Space
+      , Str "container"
+      , Space
+      , Str "in"
+      , Space
+      , Str "interactive,"
+      , Space
+      , Str "i.e.\160terminal"
+      , Space
+      , Str "mode,"
+      , Space
+      , Str "and"
+      , Space
+      , Code ( "" , [] , [] ) "bash"
+      , SoftBreak
+      , Str "uses"
+      , Space
+      , Str "the"
+      , Space
+      , Str "container\8217s"
+      , Space
+      , Str "bash"
+      , Space
+      , Str "shell."
+      , Space
+      , Code ( "" , [] , [] ) "myquarto"
+      , Space
+      , Str "is"
+      , Space
+      , Str "the"
+      , Space
+      , Str "image\8217s"
+      , SoftBreak
+      , Str "name,"
+      , Space
+      , Str "change"
+      , Space
+      , Str "as"
+      , Space
+      , Str "needed."
+      ]
+  , Para
+      [ Str "You"
+      , Space
+      , Str "can"
+      , Space
+      , Str "create"
+      , Space
+      , Str "a"
+      , Space
+      , Str "lasting"
+      , Space
+      , Str "container"
+      , Space
+      , Str "and"
+      , Space
+      , Str "give"
+      , Space
+      , Str "it"
+      , Space
+      , Str "a"
+      , Space
+      , Str "name"
+      , SoftBreak
+      , Str "to"
+      , Space
+      , Str "modify"
+      , Space
+      , Str "it"
+      , Space
+      , Str "(e.g.\160try"
+      , Space
+      , Str "installing"
+      , Space
+      , Str "LaTeX"
+      , Space
+      , Str "package)."
+      ]
+  , CodeBlock
+      ( "" , [ "bash" ] , [] )
+      "docker container create --entrypoint='' --name dockto myquarto"
+  , Para
+      [ Str "Substitute"
+      , Space
+      , Code ( "" , [] , [] ) "dockto"
+      , Space
+      , Str "with"
+      , Space
+      , Str "your"
+      , Space
+      , Str "desired"
+      , Space
+      , Str "name"
+      , Space
+      , Str "for"
+      , Space
+      , Str "the"
+      , Space
+      , Str "container."
       ]
   ]

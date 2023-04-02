@@ -1,6 +1,4 @@
 ARG UBUNTU_VERSION=latest
-ARG OS=linux
-ARG ARCH=arm64
 ARG QUARTO_VERSION=1.3.302
 #
 #   Installer
@@ -8,8 +6,8 @@ ARG QUARTO_VERSION=1.3.302
 
 # Quarto requires glibc, ubuntu much easier than alpine
 FROM ubuntu:${UBUNTU_VERSION} as installer
-ARG OS
-ARG ARCH
+ARG TARGETARCH
+ARG TARGETOS
 ARG QUARTO_VERSION
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
@@ -17,11 +15,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         dpkg \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && curl -o quarto-${OS}-${ARCH}.deb \
-        -L https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-${OS}-${ARCH}.deb \
-    && dpkg --add-architecture ${ARCH} \
-    && dpkg --install quarto-${OS}-${ARCH}.deb \
-    && rm -f quarto-${OS}-${ARCH}.deb
+    && curl -o quarto-${TARGETOS}-${TARGETARCH}.deb \
+        -L https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-${TARGETOS}-${TARGETARCH}.deb \
+    && dpkg --add-architecture ${TARGETARCH} \
+    && dpkg --install quarto-${TARGETOS}-${TARGETARCH}.deb \
+    && rm -f quarto-${TARGETOS}-${TARGETARCH}.deb
 
 # @TODO? from the installer we only need the folders where docker was installed
 # we don't need ca-certificates, curl, dpkg. But we need the symlinks and PATH.
@@ -32,6 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 FROM installer
 # install make for tests
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        make
+        make \
+    && rm -rf /var/lib/apt/lists/*
 WORKDIR /data
 ENTRYPOINT [ "quarto" ]
