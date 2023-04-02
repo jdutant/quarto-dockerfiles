@@ -35,15 +35,39 @@ jobs:
 
       # This shows how to build directly from docker
       # (we could use make too)
-      - name: Build Quarto docker image
+      - name: Build minimal image
         run: |
           docker build \
           --build-arg TARGETOS=linux \
           --build-arg TARGETARCH=amd64 \
           -f minimal.dockerfile -t quarto .
 
-      - name: Test
+      - name: Test minimal image
         run: |
-          make -B test \
+          make -B match \
             QUARTO="docker run --rm --volume $(pwd):/data quarto"
+
+      - name: Build latex image
+        run: |
+          docker build \
+          --build-arg TARGETOS=linux \
+          --build-arg TARGETARCH=amd64 \
+          -f latex.dockerfile -t quarto-latex .
+
+      - name: Test latex image
+        run: |
+          make -B latex \
+            QUARTO="docker run --rm --volume $(pwd):/data quarto-latex"
+
+      - name: Build tinytex image
+        run: |
+          docker build \
+          --build-arg TARGETOS=linux \
+          --build-arg TARGETARCH=amd64 \
+          -f tinytex.dockerfile -t quarto-tinytex .
+
+      - name: Test tinytex image
+        run: |
+          make -B latex \
+            QUARTO="docker run --rm --volume $(pwd):/data quarto-tinytex"
 

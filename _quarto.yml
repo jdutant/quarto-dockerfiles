@@ -2,3 +2,14 @@ project:
   output-dir: _outputs
   render:
   - README.md
+
+format:
+  html:
+    toc: true
+  pdf:
+    filters:
+    - tools/removeImages.lua
+  beamer:
+    filters:
+    - tools/removeImages.lua
+      

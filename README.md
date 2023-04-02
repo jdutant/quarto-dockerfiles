@@ -19,9 +19,13 @@ Pandoc's Lua interpreter (`quarto run script.lua`), and Deno's
 typescript interpreter (`quarto run script.ts`), so these images 
 can run those too.
 
-One image so far:
+Images:
 
 - `minimal`: Quarto alone. No Python, R, or LaTeX.
+- `latex`: Quarto with small LaTeX (Tex Live) installation. Enough
+    to render a simple document as PDF. Customize to add more packages.
+- `tinytex` (`arm64` aka `x86_64` computers only): Quarto with 
+    its recommended LaTeX installation (TinyTeX).
 
 ## Requirements
 
@@ -31,45 +35,43 @@ Windows Subsystem for Linux on Windows.
 
 ## Usage
 
-### Build and test using the Makefile
+### Using the Makefile
 
-Clone the repository. Build a docker image `make build`, 
-and run the default test with `make test`. If you do 
-not get an error message, the docker image has
-correctly reproduced the expected output.
+Run `make` or `make help` to see the Makefile instructions. 
 
-The default image is named `quarto-minimal`. Once built
-you can run it following the instructions in the next
-section (replacing `myquarto` with `quarto-minimal`).
+Run `make build` to build default images (`minimal`, `latex`)
+and `make test` to check that they work.
 
-### Build and run with docker only
+These are customizable, see Makefile instructions.
 
-Clone the repository. Build the image with
+### with Docker
 
-``` bash
-docker build -t myquarto -f <image>.dockerfile .
-```
-
-Where `<image>` is the desired image, e.g. `minimal`,
-and `myquarto` your chosen name for the image. 
-If you use another name, or if you've built the image
-with `make build` (which names the image `quarto-minimal`
-by default), adapt the commands below accordingly.
-
-Once your image is built, go to any folder where you 
-want to run Quarto and execute:
+At the repository root, build images with:
 
 ```bash
-docker run -rm --volume $(pwd):/data myquarto <quarto_command>
+docker build -t quarto-minimal -f Dockerfile.minimal .
+```
+
+Build other images by replacing `Dockerfile.minimal` as
+appropriate. Choose another name for your 
+image by replacing `quarto-minimal`.
+
+Once your image is built, you can run Quarto in any folder
+with: 
+
+```bash
+docker run -rm --volume $(pwd):/data quarto-minimal <quarto_command>
 ```
 
 Substituting a Quarto command for `<quarto-command>`, e.g.
-`render README.md -o out.html`. 
+`render README.md -o out.html`. Replace `quarto-minimal` with
+the name of your image if needed. `--rm` removes the container
+after execution, `--volume $(pwd):/data` makes the present working directory accessible as `/data` within the container. 
 
-For repeated use set an environment variable, e.g.:
+For repeated use you may set an environment variable, e.g.:
 
 ```bash
-QUARTO="docker run -rm --volume $(pwd):/data myquarto"
+QUARTO="docker run -rm --volume $(pwd):/data quarto-minimal"
 
 $(QUARTO) render file1.qmd --output-dir results -t html
 $(QUARTO) create
@@ -81,12 +83,13 @@ See the [workflows folder](.github/workflows/) for
 examples of how to build and run the image as a GitHub 
 action. 
 
-### Explore the image
+### Explore the image contents
 
-To explore the image, create a container with empty entrypoint:
+To explore an image, create a container with no entry point 
+to run bash interactively:
 
 ```bash
-docker run -rm -it --entrypoint='' myquarto bash
+docker run -rm -it --entrypoint='' quarto-minimal bash
 ```
 
 `-rm` deletes the container after your session; `-it` opens
@@ -98,7 +101,7 @@ You can create a lasting container and give it a name
 to modify it (e.g. try installing LaTeX package).
 
 ```bash
-docker run --name=dockto -it --entrypoint='' myquarto bash
+docker run --name=dockto -it --entrypoint='' quarto-latex bash
 ```
 
 Substitute `dockto` with your desired name for the container.

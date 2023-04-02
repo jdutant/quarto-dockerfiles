@@ -1,2 +1,4 @@
 _outputs/
 /.quarto/
+
+/.luarc.json
