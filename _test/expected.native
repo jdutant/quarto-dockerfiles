@@ -16,7 +16,7 @@ Pandoc
                   , ""
                   )
               ]
-              ( "https://github.com/dialoa/quarto-dockerfiles/ci.yaml"
+              ( "https://github.com/dialoa/quarto-dockerfiles/actions/workflows/ci.yaml"
               , ""
               )
           ]
