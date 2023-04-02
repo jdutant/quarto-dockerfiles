@@ -32,7 +32,7 @@ all: help
 build: $(IMAGE_FILES)
 	@for image in $(IMAGE) ; do \
 		docker build 	-f Dockerfile.$$image \
-						-t $(IMAGE_PREFIX).$$image . ; \
+						-t $(IMAGE_PREFIX)-$$image . ; \
 	done
 
 .PHONY: test

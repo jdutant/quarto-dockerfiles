@@ -33,7 +33,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #
 #   Tex Live installer
 #
-# TeX Live basic scheme, no docs nor sources
+# TeX Live small scheme, no docs nor sources
+#   (the basic scheme appears not be available in some repos)
 # TeX Live's installer needs libwww-perl
 FROM installer as texlive-basic
 ARG TEXDIR="/usr/local/texlive"
@@ -49,7 +50,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     # run the script (needs libwww-perl)
     && perl ./install-tl --no-interaction \
         --texdir ${TEXDIR} \
-        --scheme basic \
+        --scheme small \
         --no-doc-install --no-src-install \
     # cleanup
     && rm -rf *
@@ -69,6 +70,8 @@ ENV PATH="${PATH}:${TEXDIRBIN_amd64}:${TEXDIRBIN_arm64}:${TEXDIRBIN_i386}}"
 
 #   Basic packages
 #   These are enough to render README.md without svg images
+#   NB: works against TeX Live's `basic` scheme as well as `small`
+#   With `small` some of these are already installed.
 FROM texlive-basic as texlive-quarto
 RUN apt-get update && apt-get install -y --no-install-recommends \
         # fontconfig used by xetex / xelatex

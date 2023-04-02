@@ -26,8 +26,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
+      matrix:
+        image: [ minimal, latex, tinytex ]
     # container:
-    #   image: pandoc/latex:${{ matrix.pandoc }}
+    #   image: jdutant/quarto-${{ matrix.image }}
 
     steps:
       - name: Checkout
@@ -35,39 +37,15 @@ jobs:
 
       # This shows how to build directly from docker
       # (we could use make too)
-      - name: Build minimal image
+      - name: Build image
         run: |
           docker build \
           --build-arg TARGETOS=linux \
           --build-arg TARGETARCH=amd64 \
-          -f Dockerfile.minimal -t quarto .
+          -f Dockerfile.${{ matrix.image }} \
+          -t quarto-${{ matrix.image }} .
 
-      - name: Test minimal image
+      - name: Test image
         run: |
           make -B match \
-            QUARTO="docker run --rm --volume $(pwd):/data quarto"
-
-      - name: Build latex image
-        run: |
-          docker build \
-          --build-arg TARGETOS=linux \
-          --build-arg TARGETARCH=amd64 \
-          -f Dockerfile.latex -t quarto-latex .
-
-      - name: Test latex image
-        run: |
-          make -B latex \
-            QUARTO="docker run --rm --volume $(pwd):/data quarto-latex"
-
-      - name: Build tinytex image
-        run: |
-          docker build \
-          --build-arg TARGETOS=linux \
-          --build-arg TARGETARCH=amd64 \
-          -f Dockerfile.tinytex -t quarto-tinytex .
-
-      - name: Test tinytex image
-        run: |
-          make -B latex \
-            QUARTO="docker run --rm --volume $(pwd):/data quarto-tinytex"
-
+            QUARTO="docker run --rm --volume $(pwd):/data quarto-${{ matrix.image }}"
