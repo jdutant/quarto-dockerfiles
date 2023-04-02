@@ -37,8 +37,8 @@ jobs:
       # (we could use make too)
       - name: Build Quarto docker image
         run: docker build -f minimal.dockerfile \
-          --build-arg TARGETOS linux \
-          --build-arg TARGETARCH amd64 \
+          --build-arg TARGETOS=linux \
+          --build-arg TARGETARCH=amd64 \
           -t quarto .
 
       - name: Test
