@@ -12,11 +12,11 @@ Pandoc
               [ Image
                   ( "" , [] , [] )
                   []
-                  ( "https://img.shields.io/github/actions/workflow/status/dialoa/quarto-dockerfiles/ci.yaml?branch=main"
+                  ( "https://img.shields.io/github/actions/workflow/status/jdutant/quarto-dockerfiles/ci.yaml?branch=main"
                   , ""
                   )
               ]
-              ( "https://github.com/dialoa/quarto-dockerfiles/actions/workflows/ci.yaml"
+              ( "https://github.com/jdutant/quarto-dockerfiles/actions/workflows/ci.yaml"
               , ""
               )
           ]
