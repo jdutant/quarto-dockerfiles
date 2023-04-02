@@ -39,7 +39,7 @@ jobs:
         run: |
           docker build \
           --build-arg TARGETOS=linux \
-          --build-arg TARGETARCH=arm64 \
+          --build-arg TARGETARCH=amd64 \
           -f minimal.dockerfile -t quarto-minimal .
 
       - name: Test
