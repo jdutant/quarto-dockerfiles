@@ -36,12 +36,14 @@ jobs:
       # This shows how to build directly from docker
       # (we could use make too)
       - name: Build Quarto docker image
-        run: docker build \
+        run: |
+          docker build \
           --build-arg TARGETOS=linux \
           --build-arg TARGETARCH=arm64 \
           -f minimal.dockerfile -t quarto-minimal .
 
       - name: Test
-        run: make -B test \
+        run: |
+          make -B test \
             QUARTO= docker run --rm --volume $(pwd):/data quarto 
 
