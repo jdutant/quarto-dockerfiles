@@ -40,10 +40,10 @@ jobs:
           docker build \
           --build-arg TARGETOS=linux \
           --build-arg TARGETARCH=amd64 \
-          -f minimal.dockerfile -t quarto-minimal .
+          -f minimal.dockerfile -t quarto .
 
       - name: Test
         run: |
           make -B test \
-            QUARTO="docker run --rm --volume $(pwd):/data quarto-minimal"
+            QUARTO="docker run --rm --volume $(pwd):/data quarto"
 
