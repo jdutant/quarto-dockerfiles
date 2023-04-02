@@ -6,7 +6,7 @@ Multi-platform docker images and GitHub actions for
 [Quarto](https://quarto.org).
 
 [CI badge]: https://img.shields.io/github/actions/workflow/status/dialoa/quarto-dockerfiles/ci.yaml?branch=main
-[CI workflow]: https://github.com/tarleb/lua-filter-template/dialoa/quarto-dockerfiles/ci.yaml
+[CI workflow]: https://github.com/dialoa/quarto-dockerfiles/ci.yaml
 
 # Overview
 
