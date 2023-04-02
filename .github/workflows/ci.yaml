@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  # Run on all pull requests that change code.
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
+      - 'tools/*'
+  # Run every time a code change is pushed.
+  push:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
+      - 'tools/*'
+  # Uncomment for a weekly test
+  # This way we will catch incompatible changes quickly.
+  # schedule:
+  #   # At 5:39am each Tuesday (UTC)
+  #   - cron: '39 5 * * 2'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+    # container:
+    #   image: pandoc/latex:${{ matrix.pandoc }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build Quarto docker image
+        run: docker build -t quarto -f Dockerfile .
+
+      - name: Test
+        run: make -B test \
+            QUARTO= docker run --rm --volume $(pwd):/data quarto 
+
