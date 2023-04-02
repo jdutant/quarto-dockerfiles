@@ -54,10 +54,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         --no-doc-install --no-src-install \
     # cleanup
     && rm -rf *
-# bins are in ${TEXDIRBIN}/<ARCH>-linux with <ARCH> = amd64 | aarch64 | i386
+# bins are in ${TEXDIRBIN}/<ARCH>-linux with <ARCH> = x86_64 | aarch64 | i386
 # using dynamic "export" would lose updated PATH at next build stages
 # so we add all with ENV - no harm in having non-existing dirs in PATH
-ARG TEXDIRBIN_amd64="${TEXDIR}/bin/amd64-linux"
+ARG TEXDIRBIN_amd64="${TEXDIR}/bin/x86_64-linux"
 ARG TEXDIRBIN_arm64="${TEXDIR}/bin/aarch64-linux"
 ARG TEXDIRBIN_i386="${TEXDIR}/bin/i386-linux"
 ENV PATH="${PATH}:${TEXDIRBIN_amd64}:${TEXDIRBIN_arm64}:${TEXDIRBIN_i386}}"
