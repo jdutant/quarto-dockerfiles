@@ -33,8 +33,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      # This shows how to build directly from docker
+      # (we could use make too)
       - name: Build Quarto docker image
-        run: docker build -t quarto -f minimal.dockerfile .
+        run: docker build -f minimal.dockerfile \
+          --build-arg TARGETOS linux \
+          --build-arg TARGETARCH amd64 \
+          -t quarto .
 
       - name: Test
         run: make -B test \
