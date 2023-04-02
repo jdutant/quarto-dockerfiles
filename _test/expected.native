@@ -1,0 +1,594 @@
+Pandoc
+  Meta { unMeta = fromList [] }
+  [ Header
+      1
+      ( "quarto-dockerfiles" , [] , [] )
+      [ Str "Quarto" , Space , Str "dockerfiles" ]
+  , Div
+      ( "" , [] , [] )
+      [ Para
+          [ Link
+              ( "" , [] , [] )
+              [ Image
+                  ( "" , [] , [] )
+                  []
+                  ( "https://img.shields.io/github/actions/workflow/status/jdutant/quarto-dockerfiles/ci.yaml?branch=main"
+                  , ""
+                  )
+              ]
+              ( "https://github.com/tarleb/lua-filter-template/jdutant/quarto-dockerfiles/ci.yaml"
+              , ""
+              )
+          ]
+      , Para
+          [ Str "GitHub"
+          , Space
+          , Str "build"
+          , Space
+          , Str "status"
+          ]
+      ]
+  , Para
+      [ Str "Multi-platform"
+      , Space
+      , Str "docker"
+      , Space
+      , Str "images"
+      , Space
+      , Str "and"
+      , Space
+      , Str "GitHub"
+      , Space
+      , Str "actions"
+      , Space
+      , Str "for"
+      , SoftBreak
+      , Link
+          ( "" , [] , [] )
+          [ Str "Quarto" ]
+          ( "https://quarto.org" , "" )
+      , Str "."
+      ]
+  , Header 1 ( "overview" , [] , [] ) [ Str "Overview" ]
+  , Para
+      [ Str "Docker"
+      , Space
+      , Str "images"
+      , Space
+      , Str "built"
+      , Space
+      , Str "from"
+      , Space
+      , Code ( "" , [] , [] ) "ubuntu"
+      , Str ","
+      , Space
+      , Str "supporting"
+      , Space
+      , Str "both"
+      , Space
+      , Code ( "" , [] , [] ) "amd64"
+      , Space
+      , Str "and"
+      , SoftBreak
+      , Code ( "" , [] , [] ) "arm64"
+      , Space
+      , Str "(Apple"
+      , Space
+      , Str "Silicon),"
+      , Space
+      , Str "with"
+      , Space
+      , Str "instructions"
+      , Space
+      , Str "for"
+      , Space
+      , Str "use"
+      , Space
+      , Str "locally"
+      , Space
+      , Str "and"
+      , Space
+      , Str "in"
+      , SoftBreak
+      , Str "GitHub"
+      , Space
+      , Str "Actions."
+      ]
+  , Para
+      [ Str "Quarto"
+      , Space
+      , Str "contains"
+      , Space
+      , Link
+          ( "" , [] , [] )
+          [ Str "Pandoc" ]
+          ( "https://pandoc.org" , "" )
+      , Space
+      , Str "(run"
+      , Space
+      , Code ( "" , [] , [] ) "quarto pandoc"
+      , Str "),"
+      , SoftBreak
+      , Str "Pandoc\8217s"
+      , Space
+      , Str "Lua"
+      , Space
+      , Str "interpreter"
+      , Space
+      , Str "("
+      , Code ( "" , [] , [] ) "quarto run script.lua"
+      , Str "),"
+      , Space
+      , Str "and"
+      , Space
+      , Str "Deno\8217s"
+      , SoftBreak
+      , Str "typescript"
+      , Space
+      , Str "interpreter"
+      , Space
+      , Str "("
+      , Code ( "" , [] , [] ) "quarto run script.ts"
+      , Str "),"
+      , Space
+      , Str "so"
+      , Space
+      , Str "these"
+      , Space
+      , Str "images"
+      , SoftBreak
+      , Str "can"
+      , Space
+      , Str "run"
+      , Space
+      , Str "those"
+      , Space
+      , Str "too."
+      ]
+  , Para
+      [ Str "One"
+      , Space
+      , Str "image"
+      , Space
+      , Str "so"
+      , Space
+      , Str "far:"
+      ]
+  , BulletList
+      [ [ Plain
+            [ Code ( "" , [] , [] ) "minimal"
+            , Str ":"
+            , Space
+            , Str "Quarto"
+            , Space
+            , Str "alone."
+            , Space
+            , Str "No"
+            , Space
+            , Str "Python,"
+            , Space
+            , Str "R,"
+            , Space
+            , Str "or"
+            , Space
+            , Str "LaTeX."
+            ]
+        ]
+      ]
+  , Header
+      2 ( "requirements" , [] , [] ) [ Str "Requirements" ]
+  , Para
+      [ Link
+          ( "" , [] , [] )
+          [ Str "Docker" ]
+          ( "https://docker.com" , "" )
+      , Str "."
+      , Space
+      , Str "If"
+      , Space
+      , Str "using"
+      , Space
+      , Str "the"
+      , Space
+      , Str "Makefile,"
+      , SoftBreak
+      , Str "you\8217ll"
+      , Space
+      , Str "need"
+      , Space
+      , Str "Xcode"
+      , Space
+      , Str "command"
+      , Space
+      , Str "line"
+      , Space
+      , Str "tools"
+      , Space
+      , Str "on"
+      , Space
+      , Str "MacOS"
+      , Space
+      , Str "and"
+      , Space
+      , Str "the"
+      , SoftBreak
+      , Str "Windows"
+      , Space
+      , Str "Subsystem"
+      , Space
+      , Str "for"
+      , Space
+      , Str "Linux"
+      , Space
+      , Str "on"
+      , Space
+      , Str "Windows."
+      ]
+  , Header 2 ( "usage" , [] , [] ) [ Str "Usage" ]
+  , Header
+      3
+      ( "build-and-test-using-the-makefile" , [] , [] )
+      [ Str "Build"
+      , Space
+      , Str "and"
+      , Space
+      , Str "test"
+      , Space
+      , Str "using"
+      , Space
+      , Str "the"
+      , Space
+      , Str "Makefile"
+      ]
+  , Para
+      [ Str "Clone"
+      , Space
+      , Str "the"
+      , Space
+      , Str "repository."
+      , Space
+      , Str "Build"
+      , Space
+      , Str "a"
+      , Space
+      , Str "docker"
+      , Space
+      , Str "image"
+      , Space
+      , Code ( "" , [] , [] ) "make build"
+      , Str ","
+      , SoftBreak
+      , Str "and"
+      , Space
+      , Str "run"
+      , Space
+      , Str "the"
+      , Space
+      , Str "default"
+      , Space
+      , Str "test"
+      , Space
+      , Str "with"
+      , Space
+      , Code ( "" , [] , [] ) "make test"
+      , Str "."
+      , Space
+      , Str "If"
+      , Space
+      , Str "you"
+      , Space
+      , Str "do"
+      , SoftBreak
+      , Str "not"
+      , Space
+      , Str "get"
+      , Space
+      , Str "an"
+      , Space
+      , Str "error"
+      , Space
+      , Str "message,"
+      , Space
+      , Str "the"
+      , Space
+      , Str "docker"
+      , Space
+      , Str "image"
+      , Space
+      , Str "has"
+      , SoftBreak
+      , Str "correctly"
+      , Space
+      , Str "reproduced"
+      , Space
+      , Str "the"
+      , Space
+      , Str "expected"
+      , Space
+      , Str "output."
+      ]
+  , Para
+      [ Str "The"
+      , Space
+      , Str "default"
+      , Space
+      , Str "image"
+      , Space
+      , Str "is"
+      , Space
+      , Str "named"
+      , Space
+      , Code ( "" , [] , [] ) "quarto-minimal"
+      , Str "."
+      , Space
+      , Str "Once"
+      , Space
+      , Str "built"
+      , SoftBreak
+      , Str "you"
+      , Space
+      , Str "can"
+      , Space
+      , Str "run"
+      , Space
+      , Str "it"
+      , Space
+      , Str "following"
+      , Space
+      , Str "the"
+      , Space
+      , Str "instructions"
+      , Space
+      , Str "in"
+      , Space
+      , Str "the"
+      , Space
+      , Str "next"
+      , SoftBreak
+      , Str "section"
+      , Space
+      , Str "(replacing"
+      , Space
+      , Code ( "" , [] , [] ) "myquarto"
+      , Space
+      , Str "with"
+      , Space
+      , Code ( "" , [] , [] ) "quarto-minimal"
+      , Str ")."
+      ]
+  , Header
+      3
+      ( "build-and-run-with-docker-only" , [] , [] )
+      [ Str "Build"
+      , Space
+      , Str "and"
+      , Space
+      , Str "run"
+      , Space
+      , Str "with"
+      , Space
+      , Str "docker"
+      , Space
+      , Str "only"
+      ]
+  , Para
+      [ Str "Clone"
+      , Space
+      , Str "the"
+      , Space
+      , Str "repository."
+      , Space
+      , Str "Build"
+      , Space
+      , Str "the"
+      , Space
+      , Str "image"
+      , Space
+      , Str "with"
+      ]
+  , CodeBlock
+      ( "" , [ "bash" ] , [] )
+      "docker build -t myquarto -f <image>.dockerfile ."
+  , Para
+      [ Str "Where"
+      , Space
+      , Code ( "" , [] , [] ) "<image>"
+      , Space
+      , Str "is"
+      , Space
+      , Str "the"
+      , Space
+      , Str "desired"
+      , Space
+      , Str "image,"
+      , Space
+      , Str "e.g.\160"
+      , Code ( "" , [] , [] ) "minimal"
+      , Str ","
+      , SoftBreak
+      , Str "and"
+      , Space
+      , Code ( "" , [] , [] ) "myquarto"
+      , Space
+      , Str "your"
+      , Space
+      , Str "chosen"
+      , Space
+      , Str "name"
+      , Space
+      , Str "for"
+      , Space
+      , Str "the"
+      , Space
+      , Str "image."
+      , SoftBreak
+      , Str "If"
+      , Space
+      , Str "you"
+      , Space
+      , Str "use"
+      , Space
+      , Str "another"
+      , Space
+      , Str "name,"
+      , Space
+      , Str "or"
+      , Space
+      , Str "if"
+      , Space
+      , Str "you\8217ve"
+      , Space
+      , Str "built"
+      , Space
+      , Str "the"
+      , Space
+      , Str "image"
+      , SoftBreak
+      , Str "with"
+      , Space
+      , Code ( "" , [] , [] ) "make build"
+      , Space
+      , Str "(which"
+      , Space
+      , Str "names"
+      , Space
+      , Str "the"
+      , Space
+      , Str "image"
+      , Space
+      , Code ( "" , [] , [] ) "quarto-minimal"
+      , SoftBreak
+      , Str "by"
+      , Space
+      , Str "default),"
+      , Space
+      , Str "adapt"
+      , Space
+      , Str "the"
+      , Space
+      , Str "commands"
+      , Space
+      , Str "below"
+      , Space
+      , Str "accordingly."
+      ]
+  , Para
+      [ Str "Once"
+      , Space
+      , Str "your"
+      , Space
+      , Str "image"
+      , Space
+      , Str "is"
+      , Space
+      , Str "built,"
+      , Space
+      , Str "go"
+      , Space
+      , Str "to"
+      , Space
+      , Str "any"
+      , Space
+      , Str "folder"
+      , Space
+      , Str "where"
+      , Space
+      , Str "you"
+      , SoftBreak
+      , Str "want"
+      , Space
+      , Str "to"
+      , Space
+      , Str "run"
+      , Space
+      , Str "Quarto"
+      , Space
+      , Str "and"
+      , Space
+      , Str "execute:"
+      ]
+  , CodeBlock
+      ( "" , [ "bash" ] , [] )
+      "docker run -rm --volume $(pwd):/data myquarto <quarto_command>"
+  , Para
+      [ Str "Substituting"
+      , Space
+      , Str "a"
+      , Space
+      , Str "Quarto"
+      , Space
+      , Str "command"
+      , Space
+      , Str "for"
+      , Space
+      , Code ( "" , [] , [] ) "<quarto-command>"
+      , Str ","
+      , Space
+      , Str "e.g."
+      , SoftBreak
+      , Code ( "" , [] , [] ) "render README.md -o out.html"
+      , Str "."
+      ]
+  , Para
+      [ Str "For"
+      , Space
+      , Str "repeated"
+      , Space
+      , Str "use"
+      , Space
+      , Str "set"
+      , Space
+      , Str "an"
+      , Space
+      , Str "environment"
+      , Space
+      , Str "variable,"
+      , Space
+      , Str "e.g.:"
+      ]
+  , CodeBlock
+      ( "" , [ "bash" ] , [] )
+      "QUARTO=\"docker run -rm --volume $(pwd):/data myquarto\"\n\n$(QUARTO) render file1.qmd --output-dir results -t html\n$(QUARTO) create"
+  , Header
+      3
+      ( "use-in-github" , [] , [] )
+      [ Str "Use" , Space , Str "in" , Space , Str "GitHub" ]
+  , Para
+      [ Str "See"
+      , Space
+      , Str "the"
+      , Space
+      , Link
+          ( "" , [] , [] )
+          [ Str "workflows" , Space , Str "folder" ]
+          ( ".github/workflows/" , "" )
+      , Space
+      , Str "for"
+      , SoftBreak
+      , Str "examples"
+      , Space
+      , Str "of"
+      , Space
+      , Str "how"
+      , Space
+      , Str "to"
+      , Space
+      , Str "build"
+      , Space
+      , Str "and"
+      , Space
+      , Str "run"
+      , Space
+      , Str "the"
+      , Space
+      , Str "image"
+      , Space
+      , Str "as"
+      , Space
+      , Str "a"
+      , Space
+      , Str "GitHub"
+      , SoftBreak
+      , Str "action."
+      ]
+  ]
