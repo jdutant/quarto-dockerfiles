@@ -719,7 +719,7 @@ Pandoc
       ]
   , CodeBlock
       ( "" , [ "bash" ] , [] )
-      "docker container create --entrypoint='' --name dockto myquarto"
+      "docker run --name=dockto -it --entrypoint='' myquarto bash"
   , Para
       [ Str "Substitute"
       , Space
@@ -738,5 +738,58 @@ Pandoc
       , Str "the"
       , Space
       , Str "container."
+      , SoftBreak
+      , Str "Once"
+      , Space
+      , Str "you\8217ve"
+      , Space
+      , Str "exited"
+      , Space
+      , Str "it,"
+      , Space
+      , Str "you"
+      , Space
+      , Str "can"
+      , Space
+      , Str "re-enter"
+      , Space
+      , Str "with:"
+      ]
+  , CodeBlock
+      ( "" , [ "bash" ] , [] ) "docker start -ai dockto"
+  , Para
+      [ Str "Where"
+      , Space
+      , Code ( "" , [] , [] ) "-ai"
+      , Space
+      , Str "passes"
+      , Space
+      , Str "your"
+      , Space
+      , Str "command"
+      , Space
+      , Str "line"
+      , Space
+      , Str "input"
+      , Space
+      , Str "("
+      , Code ( "" , [] , [] ) "-i"
+      , Str ")"
+      , Space
+      , Str "and"
+      , Space
+      , Str "returns"
+      , SoftBreak
+      , Str "the"
+      , Space
+      , Str "container\8217s"
+      , Space
+      , Str "command-line"
+      , Space
+      , Str "output"
+      , Space
+      , Str "("
+      , Code ( "" , [] , [] ) "-a"
+      , Str ")."
       ]
   ]

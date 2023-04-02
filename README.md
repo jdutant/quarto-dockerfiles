@@ -98,7 +98,15 @@ You can create a lasting container and give it a name
 to modify it (e.g. try installing LaTeX package).
 
 ```bash
-docker container create --entrypoint='' --name dockto myquarto
+docker run --name=dockto -it --entrypoint='' myquarto bash
 ```
 
 Substitute `dockto` with your desired name for the container.
+Once you've exited it, you can re-enter with:
+
+```bash
+docker start -ai dockto
+```
+
+Where `-ai` passes your command line input (`-i`) and returns 
+the container's command-line output (`-a`).
