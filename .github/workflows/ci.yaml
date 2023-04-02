@@ -40,7 +40,7 @@ jobs:
           docker build \
           --build-arg TARGETOS=linux \
           --build-arg TARGETARCH=amd64 \
-          -f minimal.dockerfile -t quarto .
+          -f Dockerfile.minimal -t quarto .
 
       - name: Test minimal image
         run: |
@@ -52,7 +52,7 @@ jobs:
           docker build \
           --build-arg TARGETOS=linux \
           --build-arg TARGETARCH=amd64 \
-          -f latex.dockerfile -t quarto-latex .
+          -f Dockerfile.latex -t quarto-latex .
 
       - name: Test latex image
         run: |
@@ -64,7 +64,7 @@ jobs:
           docker build \
           --build-arg TARGETOS=linux \
           --build-arg TARGETARCH=amd64 \
-          -f tinytex.dockerfile -t quarto-tinytex .
+          -f Dockerfile.tinytex -t quarto-tinytex .
 
       - name: Test tinytex image
         run: |
