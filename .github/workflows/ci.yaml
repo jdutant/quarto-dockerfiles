@@ -45,5 +45,5 @@ jobs:
       - name: Test
         run: |
           make -B test \
-            QUARTO= docker run --rm --volume $(pwd):/data quarto 
+            QUARTO="docker run --rm --volume $(pwd):/data quarto"
 
