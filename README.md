@@ -78,7 +78,7 @@ image by replacing `quarto-minimal`.
 
 ### Run Quarto
 
-Once your image is built, you can run Quarto in any folder
+Once your image is built or pulled, you can run Quarto in any folder
 with: 
 
 ```bash

@@ -523,7 +523,11 @@ Pandoc
       , Space
       , Str "is"
       , Space
-      , Str "built,"
+      , Str "built"
+      , Space
+      , Str "or"
+      , Space
+      , Str "pulled,"
       , Space
       , Str "you"
       , Space
