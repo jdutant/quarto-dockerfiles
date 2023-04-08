@@ -510,6 +510,10 @@ Pandoc
       2
       ( "basic-usage" , [] , [] )
       [ Str "Basic" , Space , Str "usage" ]
+  , Header
+      3
+      ( "run-quarto" , [] , [] )
+      [ Str "Run" , Space , Str "Quarto" ]
   , Para
       [ Str "Once"
       , Space
@@ -660,6 +664,62 @@ Pandoc
   , CodeBlock
       ( "" , [ "bash" ] , [] )
       "QUARTO=\"docker run --rm --volume $(pwd):/data quarto-minimal\"\n\n$(QUARTO) render file1.qmd --output-dir results -t html\n$(QUARTO) create"
+  , Header
+      3
+      ( "run-pandoc-lua-typescript" , [] , [] )
+      [ Str "Run"
+      , Space
+      , Str "Pandoc,"
+      , Space
+      , Str "Lua,"
+      , Space
+      , Str "Typescript"
+      ]
+  , Para
+      [ Str "Run"
+      , Space
+      , Str "Pandoc"
+      , Space
+      , Str "instead"
+      , Space
+      , Str "with:"
+      ]
+  , CodeBlock
+      ( "" , [] , [] )
+      "docker run --rm --volume $(pwd):/data quarto-minimal pandoc <pandoc command>\n\n$(QUARTO) pandoc source.md -o out.html"
+  , Para
+      [ Str "Or"
+      , Space
+      , Str "use"
+      , Space
+      , Str "the"
+      , Space
+      , Str "Quarto"
+      , Space
+      , Str "command"
+      , Space
+      , Code ( "" , [] , [] ) "run"
+      , Space
+      , Str "to"
+      , Space
+      , Str "run"
+      , Space
+      , Str "a"
+      , Space
+      , Str "script,"
+      , Space
+      , Str "as"
+      , Space
+      , Str "describe"
+      , Space
+      , Str "in"
+      , SoftBreak
+      , Link
+          ( "" , [] , [] )
+          [ Str "Quarto\8217s" , Space , Str "documentation" ]
+          ( "https://quarto.org/docs/projects/scripts.html" , "" )
+      , Str "."
+      ]
   , Header
       3
       ( "in-a-github-action" , [] , [] )

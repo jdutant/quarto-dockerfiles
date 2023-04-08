@@ -76,6 +76,8 @@ image by replacing `quarto-minimal`.
 
 ## Basic usage
 
+### Run Quarto
+
 Once your image is built, you can run Quarto in any folder
 with: 
 
@@ -97,6 +99,19 @@ QUARTO="docker run --rm --volume $(pwd):/data quarto-minimal"
 $(QUARTO) render file1.qmd --output-dir results -t html
 $(QUARTO) create
 ```
+
+### Run Pandoc, Lua, Typescript
+
+Run Pandoc instead with:
+
+```
+docker run --rm --volume $(pwd):/data quarto-minimal pandoc <pandoc command>
+
+$(QUARTO) pandoc source.md -o out.html
+```
+
+Or use the Quarto command `run` to run a script, as describe in 
+[Quarto's documentation](https://quarto.org/docs/projects/scripts.html).
 
 ### in a GitHub action
 
