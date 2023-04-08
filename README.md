@@ -80,7 +80,7 @@ Once your image is built, you can run Quarto in any folder
 with: 
 
 ```bash
-docker run -rm --volume $(pwd):/data quarto-minimal <quarto_command>
+docker run --rm --volume $(pwd):/data quarto-minimal <quarto_command>
 ```
 
 Substituting a Quarto command for `<quarto-command>`, e.g.
@@ -92,7 +92,7 @@ after execution, `--volume $(pwd):/data` makes the present working directory acc
 For repeated use you may set an environment variable, e.g.:
 
 ```bash
-QUARTO="docker run -rm --volume $(pwd):/data quarto-minimal"
+QUARTO="docker run --rm --volume $(pwd):/data quarto-minimal"
 
 $(QUARTO) render file1.qmd --output-dir results -t html
 $(QUARTO) create
@@ -142,10 +142,10 @@ Create a container with no entry point
 to run bash interactively:
 
 ```bash
-docker run -rm -it --entrypoint='' quarto-minimal bash
+docker run --rm -it --entrypoint='' quarto-minimal bash
 ```
 
-`-rm` deletes the container after your session; `-it` opens
+`--rm` deletes the container after your session; `-it` opens
 the container in interactive, i.e. terminal mode, and `bash` 
 uses the container's bash shell. `myquarto` is the image's
 name, change as needed.
@@ -176,7 +176,7 @@ document to PDF. What if more are needed?
 * Quarto downloads and install them automatically in
   the *container* that runs the image. The downloaded
   packages are available as long as the container
-  is alive. (Don't use the autoremove `-rm` option
+  is alive. (Don't use the autoremove `--rm` option
   if you want this!)
 * You can customize the Dockerfile.latex image to
   download extra packages. Uncomment the 

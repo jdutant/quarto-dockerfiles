@@ -539,7 +539,7 @@ Pandoc
       ]
   , CodeBlock
       ( "" , [ "bash" ] , [] )
-      "docker run -rm --volume $(pwd):/data quarto-minimal <quarto_command>"
+      "docker run --rm --volume $(pwd):/data quarto-minimal <quarto_command>"
   , Para
       [ Str "Substituting"
       , Space
@@ -659,7 +659,7 @@ Pandoc
       ]
   , CodeBlock
       ( "" , [ "bash" ] , [] )
-      "QUARTO=\"docker run -rm --volume $(pwd):/data quarto-minimal\"\n\n$(QUARTO) render file1.qmd --output-dir results -t html\n$(QUARTO) create"
+      "QUARTO=\"docker run --rm --volume $(pwd):/data quarto-minimal\"\n\n$(QUARTO) render file1.qmd --output-dir results -t html\n$(QUARTO) create"
   , Header
       3
       ( "in-a-github-action" , [] , [] )
@@ -963,9 +963,9 @@ Pandoc
       ]
   , CodeBlock
       ( "" , [ "bash" ] , [] )
-      "docker run -rm -it --entrypoint='' quarto-minimal bash"
+      "docker run --rm -it --entrypoint='' quarto-minimal bash"
   , Para
-      [ Code ( "" , [] , [] ) "-rm"
+      [ Code ( "" , [] , [] ) "--rm"
       , Space
       , Str "deletes"
       , Space
@@ -1272,7 +1272,7 @@ Pandoc
             , Space
             , Str "autoremove"
             , Space
-            , Code ( "" , [] , [] ) "-rm"
+            , Code ( "" , [] , [] ) "--rm"
             , Space
             , Str "option"
             , SoftBreak
