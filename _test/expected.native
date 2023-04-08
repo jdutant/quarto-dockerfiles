@@ -1053,9 +1053,9 @@ Pandoc
       , Space
       , Str "in"
       , Space
-      , Str "interactive,"
+      , Str "interactiv"
       , Space
-      , Str "i.e.\160terminal"
+      , Str "(terminal)"
       , Space
       , Str "mode,"
       , Space
@@ -1071,23 +1071,52 @@ Pandoc
       , Space
       , Str "bash"
       , Space
-      , Str "shell."
+      , Str "terminal."
       , Space
-      , Code ( "" , [] , [] ) "myquarto"
+      , Code ( "" , [] , [] ) "quarto-minimal"
       , Space
       , Str "is"
       , Space
       , Str "the"
-      , Space
-      , Str "image\8217s"
       , SoftBreak
-      , Str "name,"
+      , Str "image\8217s"
       , Space
-      , Str "change"
+      , Str "name"
       , Space
-      , Str "as"
+      , Str "(e.g.\160"
+      , Code ( "" , [] , [] ) "jdutant/quarto-minimal"
       , Space
-      , Str "needed."
+      , Str "if"
+      , Space
+      , Str "you"
+      , Space
+      , Str "have"
+      , SoftBreak
+      , Str "pulled"
+      , Space
+      , Str "it"
+      , Space
+      , Str "but"
+      , Space
+      , Str "nor"
+      , Space
+      , Str "renamed"
+      , Space
+      , Str "it)."
+      , Space
+      , Str "Type"
+      , Space
+      , Code ( "" , [] , [] ) "exit"
+      , Space
+      , Str "to"
+      , Space
+      , Str "exit"
+      , Space
+      , Str "the"
+      , SoftBreak
+      , Str "container\8217s"
+      , Space
+      , Str "terminal."
       ]
   , Para
       [ Str "You"
@@ -1100,9 +1129,7 @@ Pandoc
       , Space
       , Str "lasting"
       , Space
-      , Str "container"
-      , Space
-      , Str "and"
+      , Str "container,"
       , Space
       , Str "give"
       , Space
@@ -1110,21 +1137,27 @@ Pandoc
       , Space
       , Str "a"
       , Space
-      , Str "name"
+      , Str "name,"
+      , Space
+      , Str "and"
       , SoftBreak
+      , Str "enter"
+      , Space
+      , Str "it"
+      , Space
       , Str "to"
       , Space
       , Str "modify"
       , Space
-      , Str "it"
+      , Str "it,"
       , Space
-      , Str "(e.g.\160try"
+      , Str "e.g.\160install"
       , Space
-      , Str "installing"
+      , Str "a"
       , Space
       , Str "LaTeX"
       , Space
-      , Str "package)."
+      , Str "package:"
       ]
   , CodeBlock
       ( "" , [ "bash" ] , [] )
@@ -1201,6 +1234,94 @@ Pandoc
       , Code ( "" , [] , [] ) "-a"
       , Str ")."
       ]
+  , Para
+      [ Str "Any"
+      , Space
+      , Str "modifications"
+      , Space
+      , Str "to"
+      , Space
+      , Str "the"
+      , Space
+      , Str "container"
+      , Space
+      , Str "will"
+      , Space
+      , Str "be"
+      , Space
+      , Str "preserved"
+      , Space
+      , Str "by"
+      , Space
+      , Str "Docker"
+      , SoftBreak
+      , Str "until"
+      , Space
+      , Str "it"
+      , Space
+      , Str "is"
+      , Space
+      , Str "deleted"
+      , Space
+      , Str "(with"
+      , Space
+      , Code ( "" , [] , [] ) "docker rm dockto"
+      , Str ")."
+      ]
+  , Para
+      [ Str "If"
+      , Space
+      , Str "you"
+      , Space
+      , Str "want"
+      , Space
+      , Str "to"
+      , Space
+      , Str "both"
+      , Space
+      , Str "use"
+      , Space
+      , Str "the"
+      , Space
+      , Str "container"
+      , Space
+      , Str "as"
+      , Space
+      , Str "Quarto"
+      , Space
+      , Str "app"
+      , Space
+      , Str "and"
+      , SoftBreak
+      , Str "persist"
+      , Space
+      , Str "its"
+      , Space
+      , Str "installation,"
+      , Space
+      , Str "you"
+      , Space
+      , Str "should"
+      , Space
+      , Str "mount"
+      , Space
+      , Str "a"
+      , Space
+      , Str "working"
+      , Space
+      , Str "folder"
+      , SoftBreak
+      , Str "when"
+      , Space
+      , Str "you"
+      , Space
+      , Str "create"
+      , Space
+      , Str "it:"
+      ]
+  , CodeBlock
+      ( "" , [ "bash" ] , [] )
+      "$ docker run --name=dockto --volume $(pwd):/data -it --entrypoint='' quarto-latex bash\nroot@d96174e63ea:/data# exit\n$ docker -ai start dockto\nroot@d96174e63ea:/data# quarto render\n...\nroot@d96174e63ea:/data# exit\n$ open <rendered file>"
   , Header
       3
       ( "persist-a-latex-installation" , [] , [] )

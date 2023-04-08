@@ -161,12 +161,14 @@ docker run --rm -it --entrypoint='' quarto-minimal bash
 ```
 
 `--rm` deletes the container after your session; `-it` opens
-the container in interactive, i.e. terminal mode, and `bash` 
-uses the container's bash shell. `myquarto` is the image's
-name, change as needed.
+the container in interactiv (terminal) mode, and `bash` 
+uses the container's bash terminal. `quarto-minimal` is the 
+image's name (e.g. `jdutant/quarto-minimal` if you have
+pulled it but nor renamed it). Type `exit` to exit the
+container's terminal.
 
-You can create a lasting container and give it a name
-to modify it (e.g. try installing LaTeX package).
+You can create a lasting container, give it a name, and
+enter it to modify it, e.g. install a LaTeX package:
 
 ```bash
 docker run --name=dockto -it --entrypoint='' quarto-latex bash
@@ -180,7 +182,24 @@ docker start -ai dockto
 ```
 
 Where `-ai` passes your command line input (`-i`) and returns 
-the container's command-line output (`-a`).
+the container's command-line output (`-a`). 
+
+Any modifications to the container will be preserved by Docker
+until it is deleted (with `docker rm dockto`).
+
+If you want to both use the container as Quarto app and 
+persist its installation, you should mount a working folder 
+when you create it:
+
+```bash
+$ docker run --name=dockto --volume $(pwd):/data -it --entrypoint='' quarto-latex bash
+root@d96174e63ea:/data# exit
+$ docker -ai start dockto
+root@d96174e63ea:/data# quarto render
+...
+root@d96174e63ea:/data# exit
+$ open <rendered file>
+```
 
 ### Persist a LaTeX installation
 
