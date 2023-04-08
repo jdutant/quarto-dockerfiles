@@ -1199,10 +1199,7 @@ Pandoc
       ]
   , Header
       3
-      ( "persist-a-latex-installation-with-docker-volumes"
-      , []
-      , []
-      )
+      ( "persist-a-latex-installation" , [] , [] )
       [ Str "Persist"
       , Space
       , Str "a"
@@ -1210,12 +1207,6 @@ Pandoc
       , Str "LaTeX"
       , Space
       , Str "installation"
-      , Space
-      , Str "with"
-      , Space
-      , Str "Docker"
-      , Space
-      , Str "volumes"
       ]
   , Para
       [ Str "The"

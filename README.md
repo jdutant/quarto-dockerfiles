@@ -182,7 +182,7 @@ docker start -ai dockto
 Where `-ai` passes your command line input (`-i`) and returns 
 the container's command-line output (`-a`).
 
-### Persist a LaTeX installation with Docker volumes
+### Persist a LaTeX installation
 
 The `latex` image contains a basic TeX Live installation
 with just enough packages for Quarto to convert a simple
