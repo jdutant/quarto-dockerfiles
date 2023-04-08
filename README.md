@@ -8,7 +8,7 @@ Multi-platform docker images and GitHub actions for
 [CI badge]: https://img.shields.io/github/actions/workflow/status/jdutant/quarto-dockerfiles/ci.yaml?branch=main
 [CI workflow]: https://github.com/jdutant/quarto-dockerfiles/actions/workflows/ci.yaml
 
-# Overview
+## Overview
 
 Docker images built from `ubuntu`, supporting both `amd64` and
 `arm64` (Apple Silicon), with instructions for use locally and in
@@ -21,21 +21,39 @@ can run those too.
 
 Images:
 
-- `minimal`: Quarto alone. No Python, R, or LaTeX.
+- `minimal`: Quarto alone. No Python, R, or LaTeX. ~400Mb
 - `latex`: Quarto with small LaTeX (Tex Live) installation. Enough
-    to render a simple document as PDF. Customize to add more packages.
-- `tinytex` (`arm64` aka `x86_64` computers only): Quarto with 
-    its recommended LaTeX installation (TinyTeX).
+    to render a simple document as PDF, and Quarto automatically
+    downloads any extra packages needed. Customize to add more packages permanently. ~800Mb
+- `tinytex` (`amd64` aka `x86_64` computers only): Quarto with 
+    its recommended LaTeX installation (TinyTeX). ~800Mb
 
-## Requirements
+The `latex` image doesn't use TinyTeX because Quarto can't
+install it on arm64 machines.
 
-[Docker](https://docker.com). If using the Makefile, 
-you'll need Xcode command line tools on MacOS and the
-Windows Subsystem for Linux on Windows.
+Requires [Docker](https://docker.com).
 
-## Usage
+## Pull or build the images
 
-### Using the Makefile
+### Pull from Docker hub
+
+``` bash
+docker pull jdutant/quarto-minimal
+docker pull jdutant/quarto-latex
+```
+
+You can rename it for convenience:
+
+```bash
+docker tag jdutant/quarto-minimal myname
+```
+
+Substitute `quarto-minimal` for `myname` to run the example
+commands below.
+
+### Build with make
+
+Clone this repository.
 
 Run `make` or `make help` to see the Makefile instructions. 
 
@@ -44,9 +62,9 @@ and `make test` to check that they work.
 
 These are customizable, see Makefile instructions.
 
-### with Docker
+### Build with Docker
 
-At the repository root, build images with:
+Clone this repository. At the root, build images with:
 
 ```bash
 docker build -t quarto-minimal -f Dockerfile.minimal .
@@ -55,6 +73,8 @@ docker build -t quarto-minimal -f Dockerfile.minimal .
 Build other images by replacing `Dockerfile.minimal` as
 appropriate. Choose another name for your 
 image by replacing `quarto-minimal`.
+
+## Basic usage
 
 Once your image is built, you can run Quarto in any folder
 with: 
@@ -65,7 +85,8 @@ docker run -rm --volume $(pwd):/data quarto-minimal <quarto_command>
 
 Substituting a Quarto command for `<quarto-command>`, e.g.
 `render README.md -o out.html`. Replace `quarto-minimal` with
-the name of your image if needed. `--rm` removes the container
+the name of your image if needed (e.g. `jdutant/quarto-minimal` if
+you have pulled it but not renamed it). `--rm` removes the container
 after execution, `--volume $(pwd):/data` makes the present working directory accessible as `/data` within the container. 
 
 For repeated use you may set an environment variable, e.g.:
@@ -77,15 +98,47 @@ $(QUARTO) render file1.qmd --output-dir results -t html
 $(QUARTO) create
 ```
 
-### Use in GitHub
+### in a GitHub action
 
 See the [workflows folder](.github/workflows/) for 
 examples of how to build and run the image as a GitHub 
 action. 
 
-### Explore the image contents
+## Advanced usage
 
-To explore an image, create a container with no entry point 
+### Set a specific Quarto release
+
+Using `docker build` chose your Quarto version with:
+
+```bash
+docker build -t quarto-minimal -f Dockerfile.minimal --build-arg QUARTO_VERSION=1.3.313 .
+```
+
+Note that only recent versions of Quarto have a `linux/arm64` version 
+needed to run the image on an arm64 machine.
+
+Use the script `tools/latest.sh` to find out version numbers
+for Quarto's official "latest" release and edge (actual
+latest) release: 
+
+```bash
+sh tools/latest.sh edge
+sh tools/latest.sh latest
+sh tools/latest         (defaults to 'edge')
+```
+
+Or check out [Quarto's releases page](https://github.com/quarto-dev/quarto-cli/releases/tag/v1.2.475).
+
+By the way the images run Ubuntu rather than Alpine because
+Quarto relies on `glibc`. You can set which the Ubuntu image
+tag with `--build-arg UBUNTU_VERSION`, (default `latest`).
+
+### Explore an image
+
+This is useful to explore where things are set and
+try installing additional packages. 
+
+Create a container with no entry point 
 to run bash interactively:
 
 ```bash
@@ -113,3 +166,26 @@ docker start -ai dockto
 
 Where `-ai` passes your command line input (`-i`) and returns 
 the container's command-line output (`-a`).
+
+### Persist a LaTeX installation with Docker volumes
+
+The `latex` image contains a basic TeX Live installation
+with just enough packages for Quarto to convert a simple
+document to PDF. What if more are needed?
+
+* Quarto downloads and install them automatically in
+  the *container* that runs the image. The downloaded
+  packages are available as long as the container
+  is alive. (Don't use the autoremove `-rm` option
+  if you want this!)
+* You can customize the Dockerfile.latex image to
+  download extra packages. Uncomment the 
+  "More LaTeX packages" section and add yours.
+
+A third solution would be to use a 
+[Docker volume](https://docs.docker.com/storage/volumes/)
+to persist the folders where Tex Live packages
+are installed. I think only a couple of folders
+need to be preserved. If you're doing this, please
+post a how-to here (as PR or issue)!
+

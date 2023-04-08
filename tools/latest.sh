@@ -1,6 +1,10 @@
 #! bin/bash
 
-# Display edge and latest release 
+# Display Quarto's edge and latest release
+# 
+# Usage
+#   sh latest.sh [ edge | latest ]
+#   sh latest.sh    -> displays edge
 
 OWNER="quarto-dev"
 REPO="quarto-cli"

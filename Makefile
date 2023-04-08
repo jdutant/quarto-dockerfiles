@@ -27,8 +27,6 @@ all: help
 ## build: Build Dockerfile.$(IMAGE) as $(IMAGE_PREFIX)-$(IMAGE)
 ## :     make build IMAGE="minimal latex" IMAGE_PREFIX="myquarto"
 ## : Image prefix defaults to `quarto`
-
-
 build: $(IMAGE_FILES)
 	@for image in $(IMAGE) ; do \
 		docker build 	-f Dockerfile.$$image \

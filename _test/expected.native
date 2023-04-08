@@ -49,7 +49,7 @@ Pandoc
           ( "https://quarto.org" , "" )
       , Str "."
       ]
-  , Header 1 ( "overview" , [] , [] ) [ Str "Overview" ]
+  , Header 2 ( "overview" , [] , [] ) [ Str "Overview" ]
   , Para
       [ Str "Docker"
       , Space
@@ -164,6 +164,8 @@ Pandoc
             , Str "or"
             , Space
             , Str "LaTeX."
+            , Space
+            , Str "~400Mb"
             ]
         ]
       , [ Plain
@@ -198,7 +200,23 @@ Pandoc
             , Space
             , Str "as"
             , Space
-            , Str "PDF."
+            , Str "PDF,"
+            , Space
+            , Str "and"
+            , Space
+            , Str "Quarto"
+            , Space
+            , Str "automatically"
+            , SoftBreak
+            , Str "downloads"
+            , Space
+            , Str "any"
+            , Space
+            , Str "extra"
+            , Space
+            , Str "packages"
+            , Space
+            , Str "needed."
             , Space
             , Str "Customize"
             , Space
@@ -208,14 +226,18 @@ Pandoc
             , Space
             , Str "more"
             , Space
-            , Str "packages."
+            , Str "packages"
+            , Space
+            , Str "permanently."
+            , Space
+            , Str "~800Mb"
             ]
         ]
       , [ Plain
             [ Code ( "" , [] , [] ) "tinytex"
             , Space
             , Str "("
-            , Code ( "" , [] , [] ) "arm64"
+            , Code ( "" , [] , [] ) "amd64"
             , Space
             , Str "aka"
             , Space
@@ -238,63 +260,124 @@ Pandoc
             , Str "installation"
             , Space
             , Str "(TinyTeX)."
+            , Space
+            , Str "~800Mb"
             ]
         ]
       ]
-  , Header
-      2 ( "requirements" , [] , [] ) [ Str "Requirements" ]
   , Para
-      [ Link
+      [ Str "The"
+      , Space
+      , Code ( "" , [] , [] ) "latex"
+      , Space
+      , Str "image"
+      , Space
+      , Str "doesn\8217t"
+      , Space
+      , Str "use"
+      , Space
+      , Str "TinyTeX"
+      , Space
+      , Str "because"
+      , Space
+      , Str "Quarto"
+      , Space
+      , Str "can\8217t"
+      , SoftBreak
+      , Str "install"
+      , Space
+      , Str "it"
+      , Space
+      , Str "on"
+      , Space
+      , Str "arm64"
+      , Space
+      , Str "machines."
+      ]
+  , Para
+      [ Str "Requires"
+      , Space
+      , Link
           ( "" , [] , [] )
           [ Str "Docker" ]
           ( "https://docker.com" , "" )
       , Str "."
+      ]
+  , Header
+      2
+      ( "pull-or-build-the-images" , [] , [] )
+      [ Str "Pull"
       , Space
-      , Str "If"
+      , Str "or"
       , Space
-      , Str "using"
-      , Space
-      , Str "the"
-      , Space
-      , Str "Makefile,"
-      , SoftBreak
-      , Str "you\8217ll"
-      , Space
-      , Str "need"
-      , Space
-      , Str "Xcode"
-      , Space
-      , Str "command"
-      , Space
-      , Str "line"
-      , Space
-      , Str "tools"
-      , Space
-      , Str "on"
-      , Space
-      , Str "MacOS"
-      , Space
-      , Str "and"
+      , Str "build"
       , Space
       , Str "the"
-      , SoftBreak
-      , Str "Windows"
       , Space
-      , Str "Subsystem"
+      , Str "images"
+      ]
+  , Header
+      3
+      ( "pull-from-docker-hub" , [] , [] )
+      [ Str "Pull"
+      , Space
+      , Str "from"
+      , Space
+      , Str "Docker"
+      , Space
+      , Str "hub"
+      ]
+  , CodeBlock
+      ( "" , [ "bash" ] , [] )
+      "docker pull jdutant/quarto-minimal\ndocker pull jdutant/quarto-latex"
+  , Para
+      [ Str "You"
+      , Space
+      , Str "can"
+      , Space
+      , Str "rename"
+      , Space
+      , Str "it"
       , Space
       , Str "for"
       , Space
-      , Str "Linux"
-      , Space
-      , Str "on"
-      , Space
-      , Str "Windows."
+      , Str "convenience:"
       ]
-  , Header 2 ( "usage" , [] , [] ) [ Str "Usage" ]
+  , CodeBlock
+      ( "" , [ "bash" ] , [] )
+      "docker tag jdutant/quarto-minimal myname"
+  , Para
+      [ Str "Substitute"
+      , Space
+      , Code ( "" , [] , [] ) "quarto-minimal"
+      , Space
+      , Str "for"
+      , Space
+      , Code ( "" , [] , [] ) "myname"
+      , Space
+      , Str "to"
+      , Space
+      , Str "run"
+      , Space
+      , Str "the"
+      , Space
+      , Str "example"
+      , SoftBreak
+      , Str "commands"
+      , Space
+      , Str "below."
+      ]
   , Header
       3
-      ( "using-the-makefile" , [] , [] )
-      [ Str "Using" , Space , Str "the" , Space , Str "Makefile" ]
+      ( "build-with-make" , [] , [] )
+      [ Str "Build" , Space , Str "with" , Space , Str "make" ]
+  , Para
+      [ Str "Clone"
+      , Space
+      , Str "this"
+      , Space
+      , Str "repository."
+      ]
   , Para
       [ Str "Run"
       , Space
@@ -363,14 +446,18 @@ Pandoc
       ]
   , Header
       3
-      ( "with-docker" , [] , [] )
-      [ Str "with" , Space , Str "Docker" ]
+      ( "build-with-docker" , [] , [] )
+      [ Str "Build" , Space , Str "with" , Space , Str "Docker" ]
   , Para
-      [ Str "At"
+      [ Str "Clone"
+      , Space
+      , Str "this"
+      , Space
+      , Str "repository."
+      , Space
+      , Str "At"
       , Space
       , Str "the"
-      , Space
-      , Str "repository"
       , Space
       , Str "root,"
       , Space
@@ -419,6 +506,10 @@ Pandoc
       , Code ( "" , [] , [] ) "quarto-minimal"
       , Str "."
       ]
+  , Header
+      2
+      ( "basic-usage" , [] , [] )
+      [ Str "Basic" , Space , Str "usage" ]
   , Para
       [ Str "Once"
       , Space
@@ -486,7 +577,28 @@ Pandoc
       , Space
       , Str "if"
       , Space
-      , Str "needed."
+      , Str "needed"
+      , Space
+      , Str "(e.g.\160"
+      , Code ( "" , [] , [] ) "jdutant/quarto-minimal"
+      , Space
+      , Str "if"
+      , SoftBreak
+      , Str "you"
+      , Space
+      , Str "have"
+      , Space
+      , Str "pulled"
+      , Space
+      , Str "it"
+      , Space
+      , Str "but"
+      , Space
+      , Str "not"
+      , Space
+      , Str "renamed"
+      , Space
+      , Str "it)."
       , Space
       , Code ( "" , [] , [] ) "--rm"
       , Space
@@ -550,8 +662,15 @@ Pandoc
       "QUARTO=\"docker run -rm --volume $(pwd):/data quarto-minimal\"\n\n$(QUARTO) render file1.qmd --output-dir results -t html\n$(QUARTO) create"
   , Header
       3
-      ( "use-in-github" , [] , [] )
-      [ Str "Use" , Space , Str "in" , Space , Str "GitHub" ]
+      ( "in-a-github-action" , [] , [] )
+      [ Str "in"
+      , Space
+      , Str "a"
+      , Space
+      , Str "GitHub"
+      , Space
+      , Str "action"
+      ]
   , Para
       [ Str "See"
       , Space
@@ -591,26 +710,236 @@ Pandoc
       , Str "action."
       ]
   , Header
+      2
+      ( "advanced-usage" , [] , [] )
+      [ Str "Advanced" , Space , Str "usage" ]
+  , Header
       3
-      ( "explore-the-image-contents" , [] , [] )
-      [ Str "Explore"
+      ( "set-a-specific-quarto-release" , [] , [] )
+      [ Str "Set"
+      , Space
+      , Str "a"
+      , Space
+      , Str "specific"
+      , Space
+      , Str "Quarto"
+      , Space
+      , Str "release"
+      ]
+  , Para
+      [ Str "Using"
+      , Space
+      , Code ( "" , [] , [] ) "docker build"
+      , Space
+      , Str "chose"
+      , Space
+      , Str "your"
+      , Space
+      , Str "Quarto"
+      , Space
+      , Str "version"
+      , Space
+      , Str "with:"
+      ]
+  , CodeBlock
+      ( "" , [ "bash" ] , [] )
+      "docker build -t quarto-minimal -f Dockerfile.minimal --build-arg QUARTO_VERSION=1.3.313 ."
+  , Para
+      [ Str "Note"
+      , Space
+      , Str "that"
+      , Space
+      , Str "only"
+      , Space
+      , Str "recent"
+      , Space
+      , Str "versions"
+      , Space
+      , Str "of"
+      , Space
+      , Str "Quarto"
+      , Space
+      , Str "have"
+      , Space
+      , Str "a"
+      , Space
+      , Code ( "" , [] , [] ) "linux/arm64"
+      , Space
+      , Str "version"
+      , SoftBreak
+      , Str "needed"
+      , Space
+      , Str "to"
+      , Space
+      , Str "run"
       , Space
       , Str "the"
       , Space
       , Str "image"
       , Space
-      , Str "contents"
-      ]
-  , Para
-      [ Str "To"
-      , Space
-      , Str "explore"
+      , Str "on"
       , Space
       , Str "an"
       , Space
-      , Str "image,"
+      , Str "arm64"
       , Space
-      , Str "create"
+      , Str "machine."
+      ]
+  , Para
+      [ Str "Use"
+      , Space
+      , Str "the"
+      , Space
+      , Str "script"
+      , Space
+      , Code ( "" , [] , [] ) "tools/latest.sh"
+      , Space
+      , Str "to"
+      , Space
+      , Str "find"
+      , Space
+      , Str "out"
+      , Space
+      , Str "version"
+      , Space
+      , Str "numbers"
+      , SoftBreak
+      , Str "for"
+      , Space
+      , Str "Quarto\8217s"
+      , Space
+      , Str "official"
+      , Space
+      , Quoted DoubleQuote [ Str "latest" ]
+      , Space
+      , Str "release"
+      , Space
+      , Str "and"
+      , Space
+      , Str "edge"
+      , Space
+      , Str "(actual"
+      , SoftBreak
+      , Str "latest)"
+      , Space
+      , Str "release:"
+      ]
+  , CodeBlock
+      ( "" , [ "bash" ] , [] )
+      "sh tools/latest.sh edge\nsh tools/latest.sh latest\nsh tools/latest         (defaults to 'edge')"
+  , Para
+      [ Str "Or"
+      , Space
+      , Str "check"
+      , Space
+      , Str "out"
+      , Space
+      , Link
+          ( "" , [] , [] )
+          [ Str "Quarto\8217s"
+          , Space
+          , Str "releases"
+          , Space
+          , Str "page"
+          ]
+          ( "https://github.com/quarto-dev/quarto-cli/releases/tag/v1.2.475"
+          , ""
+          )
+      , Str "."
+      ]
+  , Para
+      [ Str "By"
+      , Space
+      , Str "the"
+      , Space
+      , Str "way"
+      , Space
+      , Str "the"
+      , Space
+      , Str "images"
+      , Space
+      , Str "run"
+      , Space
+      , Str "Ubuntu"
+      , Space
+      , Str "rather"
+      , Space
+      , Str "than"
+      , Space
+      , Str "Alpine"
+      , Space
+      , Str "because"
+      , SoftBreak
+      , Str "Quarto"
+      , Space
+      , Str "relies"
+      , Space
+      , Str "on"
+      , Space
+      , Code ( "" , [] , [] ) "glibc"
+      , Str "."
+      , Space
+      , Str "You"
+      , Space
+      , Str "can"
+      , Space
+      , Str "set"
+      , Space
+      , Str "which"
+      , Space
+      , Str "the"
+      , Space
+      , Str "Ubuntu"
+      , Space
+      , Str "image"
+      , SoftBreak
+      , Str "tag"
+      , Space
+      , Str "with"
+      , Space
+      , Code ( "" , [] , [] ) "--build-arg UBUNTU_VERSION"
+      , Str ","
+      , Space
+      , Str "(default"
+      , Space
+      , Code ( "" , [] , [] ) "latest"
+      , Str ")."
+      ]
+  , Header
+      3
+      ( "explore-an-image" , [] , [] )
+      [ Str "Explore" , Space , Str "an" , Space , Str "image" ]
+  , Para
+      [ Str "This"
+      , Space
+      , Str "is"
+      , Space
+      , Str "useful"
+      , Space
+      , Str "to"
+      , Space
+      , Str "explore"
+      , Space
+      , Str "where"
+      , Space
+      , Str "things"
+      , Space
+      , Str "are"
+      , Space
+      , Str "set"
+      , Space
+      , Str "and"
+      , SoftBreak
+      , Str "try"
+      , Space
+      , Str "installing"
+      , Space
+      , Str "additional"
+      , Space
+      , Str "packages."
+      ]
+  , Para
+      [ Str "Create"
       , Space
       , Str "a"
       , Space
@@ -807,5 +1136,287 @@ Pandoc
       , Str "("
       , Code ( "" , [] , [] ) "-a"
       , Str ")."
+      ]
+  , Header
+      3
+      ( "persist-a-latex-installation-with-docker-volumes"
+      , []
+      , []
+      )
+      [ Str "Persist"
+      , Space
+      , Str "a"
+      , Space
+      , Str "LaTeX"
+      , Space
+      , Str "installation"
+      , Space
+      , Str "with"
+      , Space
+      , Str "Docker"
+      , Space
+      , Str "volumes"
+      ]
+  , Para
+      [ Str "The"
+      , Space
+      , Code ( "" , [] , [] ) "latex"
+      , Space
+      , Str "image"
+      , Space
+      , Str "contains"
+      , Space
+      , Str "a"
+      , Space
+      , Str "basic"
+      , Space
+      , Str "TeX"
+      , Space
+      , Str "Live"
+      , Space
+      , Str "installation"
+      , SoftBreak
+      , Str "with"
+      , Space
+      , Str "just"
+      , Space
+      , Str "enough"
+      , Space
+      , Str "packages"
+      , Space
+      , Str "for"
+      , Space
+      , Str "Quarto"
+      , Space
+      , Str "to"
+      , Space
+      , Str "convert"
+      , Space
+      , Str "a"
+      , Space
+      , Str "simple"
+      , SoftBreak
+      , Str "document"
+      , Space
+      , Str "to"
+      , Space
+      , Str "PDF."
+      , Space
+      , Str "What"
+      , Space
+      , Str "if"
+      , Space
+      , Str "more"
+      , Space
+      , Str "are"
+      , Space
+      , Str "needed?"
+      ]
+  , BulletList
+      [ [ Plain
+            [ Str "Quarto"
+            , Space
+            , Str "downloads"
+            , Space
+            , Str "and"
+            , Space
+            , Str "install"
+            , Space
+            , Str "them"
+            , Space
+            , Str "automatically"
+            , Space
+            , Str "in"
+            , SoftBreak
+            , Str "the"
+            , Space
+            , Emph [ Str "container" ]
+            , Space
+            , Str "that"
+            , Space
+            , Str "runs"
+            , Space
+            , Str "the"
+            , Space
+            , Str "image."
+            , Space
+            , Str "The"
+            , Space
+            , Str "downloaded"
+            , SoftBreak
+            , Str "packages"
+            , Space
+            , Str "are"
+            , Space
+            , Str "available"
+            , Space
+            , Str "as"
+            , Space
+            , Str "long"
+            , Space
+            , Str "as"
+            , Space
+            , Str "the"
+            , Space
+            , Str "container"
+            , SoftBreak
+            , Str "is"
+            , Space
+            , Str "alive."
+            , Space
+            , Str "(Don\8217t"
+            , Space
+            , Str "use"
+            , Space
+            , Str "the"
+            , Space
+            , Str "autoremove"
+            , Space
+            , Code ( "" , [] , [] ) "-rm"
+            , Space
+            , Str "option"
+            , SoftBreak
+            , Str "if"
+            , Space
+            , Str "you"
+            , Space
+            , Str "want"
+            , Space
+            , Str "this!)"
+            ]
+        ]
+      , [ Plain
+            [ Str "You"
+            , Space
+            , Str "can"
+            , Space
+            , Str "customize"
+            , Space
+            , Str "the"
+            , Space
+            , Str "Dockerfile.latex"
+            , Space
+            , Str "image"
+            , Space
+            , Str "to"
+            , SoftBreak
+            , Str "download"
+            , Space
+            , Str "extra"
+            , Space
+            , Str "packages."
+            , Space
+            , Str "Uncomment"
+            , Space
+            , Str "the"
+            , SoftBreak
+            , Quoted
+                DoubleQuote
+                [ Str "More"
+                , Space
+                , Str "LaTeX"
+                , Space
+                , Str "packages"
+                ]
+            , Space
+            , Str "section"
+            , Space
+            , Str "and"
+            , Space
+            , Str "add"
+            , Space
+            , Str "yours."
+            ]
+        ]
+      ]
+  , Para
+      [ Str "A"
+      , Space
+      , Str "third"
+      , Space
+      , Str "solution"
+      , Space
+      , Str "would"
+      , Space
+      , Str "be"
+      , Space
+      , Str "to"
+      , Space
+      , Str "use"
+      , Space
+      , Str "a"
+      , SoftBreak
+      , Link
+          ( "" , [] , [] )
+          [ Str "Docker" , Space , Str "volume" ]
+          ( "https://docs.docker.com/storage/volumes/" , "" )
+      , SoftBreak
+      , Str "to"
+      , Space
+      , Str "persist"
+      , Space
+      , Str "the"
+      , Space
+      , Str "folders"
+      , Space
+      , Str "where"
+      , Space
+      , Str "Tex"
+      , Space
+      , Str "Live"
+      , Space
+      , Str "packages"
+      , SoftBreak
+      , Str "are"
+      , Space
+      , Str "installed."
+      , Space
+      , Str "I"
+      , Space
+      , Str "think"
+      , Space
+      , Str "only"
+      , Space
+      , Str "a"
+      , Space
+      , Str "couple"
+      , Space
+      , Str "of"
+      , Space
+      , Str "folders"
+      , SoftBreak
+      , Str "need"
+      , Space
+      , Str "to"
+      , Space
+      , Str "be"
+      , Space
+      , Str "preserved."
+      , Space
+      , Str "If"
+      , Space
+      , Str "you\8217re"
+      , Space
+      , Str "doing"
+      , Space
+      , Str "this,"
+      , Space
+      , Str "please"
+      , SoftBreak
+      , Str "post"
+      , Space
+      , Str "a"
+      , Space
+      , Str "how-to"
+      , Space
+      , Str "here"
+      , Space
+      , Str "(as"
+      , Space
+      , Str "PR"
+      , Space
+      , Str "or"
+      , Space
+      , Str "issue)!"
       ]
   ]
